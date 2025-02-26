@@ -23,8 +23,8 @@ class OrderService
         return $this->orderRepo->getOrders();
     }
 
-    public function getAnOrder($orderId)
+    public function getOrder($orderId)
     {
-        return $this->orderRepo->getAnOrder($orderId);
+        return $this->orderRepo->getOrder($orderId);
     }
 }

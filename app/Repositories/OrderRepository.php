@@ -18,11 +18,21 @@ class OrderRepository
         }
     }
 
-    public function getOrder()
+    public function getOrders()
     {
         try {
             $allOrder = Order::all();
             return $this->responseData($$allOrder, "Fetched Successfully");
+        } catch (\Throwable $th) {
+            return $this->responseData($th, "Failed");
+        }
+    }
+
+    public function getOrder($orderId)
+    {
+        try {
+            $order = Order::findOrFail($orderId);
+            return $this->responseData($$order, "Fetched Successfully");
         } catch (\Throwable $th) {
             return $this->responseData($th, "Failed");
         }

@@ -39,7 +39,7 @@ class OrderController extends Controller
      */
     public function show(Request $request)
     {
-        return $this->OrderService->getAnOrder($request['id']);
+        return $this->OrderService->getOrder($request['id']);
     }
 
 
@@ -59,6 +59,6 @@ class OrderController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        
+
     }
 }
