@@ -59,5 +59,6 @@ class OrderController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+        
     }
 }
