@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Product;
 use App\Repositories\ProductRepository;
+use Illuminate\Http\Request;
 
 class ProductService
 {
@@ -13,18 +15,39 @@ class ProductService
         $this->productRepo = $productRepository;
     }
 
-    public function createProduct($data)
+// Create Product
+    public function createProduct(Request $request, Product $product)
     {
-        return $this->productRepo->createProduct($data);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'stock_quantity' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+        return $this->productRepo->createProduct($request, $product);
     }
 
+// Get Products
     public function getProducts()
     {
         return $this->productRepo->getProducts();
     }
-
-    public function getAProduct($productId)
+// Get a Product
+    public function getAProduct($id)
     {
-        return $this->productRepo->getAProduct($productId);
+        return $this->productRepo->getAProduct($id);
+    }
+
+// Update Product
+    public function updateProd(Request $request, $id)
+    {
+        return $this->productRepo->updateProd($request, $id);
+    }
+
+// Delete Product
+    public function deleteProduct($id)
+    {
+        return $this->productRepo->deleteProduct($id);
     }
 }

@@ -15,41 +15,31 @@ class ProductController extends Controller
     {
         $this->prodService = $productService;
     }
-
+// Get all Product
     public function index()
     {
         return $this->prodService->getProducts();
     }
-
-    public function store(Request $request)
+// Create a Product
+    public function store(Request $request, Product $product)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'stock_quantity' => 'required|numeric|min:0',
-            'category_id' => 'required|exists:categories,id'
-        ]);
-
-        return $this->prodService->createProduct($request()->all());
+        return $this->prodService->createProduct($request, $product);
+        
+    }
+// Get a Product
+    public function show($id)
+    {
+        return $this->prodService->getAProduct($id);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Request $request)
+// Update a Product
+    public function update(Request $request, $id)
     {
-        return $this->prodService->getAProduct($request['id']);
+        return $this->prodService->updateProd($request, $id);
     }
-
-
-    public function update(Request $request, Product $product)
+// Delete a Product
+    public function destroy($id)
     {
-        //
-    }
-
-    public function destroy(Product $product)
-    {
-        //
+        return $this->prodService->deleteProduct($id);
     }
 }

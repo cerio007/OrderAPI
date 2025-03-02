@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
 
 class CategoryService
@@ -22,4 +23,20 @@ class CategoryService
     {
         return $this->cate->getCategories();
     }
+    // Get a Category
+    public function getACategory($id)
+    {
+        return $this->cate->getACategory($id);
+    }
+    // Update Product
+    public function updateCate(Request $request, $id)
+    {
+        return $this->cate->updateCate($request, $id);
+    }
+        // Delete Product
+        public function deleteCategory($id)
+        {
+            return $this->cate->deleteCategory($id);
+        }
+    
 }
